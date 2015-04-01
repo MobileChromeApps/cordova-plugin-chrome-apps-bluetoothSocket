@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-registerManualTests('chrome.bluetoothSocket', function(rootEl, addButton) {
+exports.defineManualTests = function(rootEl, addButton) {
 
   var testAddress = 'B8:8D:12:25:39:BF';
   var testUuid = '00001101-0000-1000-8000-00805f9b34fb';
@@ -149,4 +149,4 @@ registerManualTests('chrome.bluetoothSocket', function(rootEl, addButton) {
       logger(sockets);
     });
   });
-});
+};
