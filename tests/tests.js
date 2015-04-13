@@ -28,23 +28,23 @@ exports.defineManualTests = function(rootEl, addButton) {
   });
 
   addButton('Log bluetooth device', function() {
-    logger(btDevice);
+    console.log(btDevice);
   });
 
   addButton('Add Events Listener', function() {
     chrome.bluetoothSocket.onReceive.addListener(function(info) {
-      logger('onReceive: ');
-      logger(info);
+      console.log('onReceive: ');
+      console.log(info);
     });
 
     chrome.bluetoothSocket.onReceiveError.addListener(function(error) {
-      logger('onReceiveError: ');
-      logger(error);
+      console.log('onReceiveError: ');
+      console.log(error);
     });
 
     chrome.bluetoothSocket.onAccept.addListener(function(info) {
-      logger('onAccept: ');
-      logger(info);
+      console.log('onAccept: ');
+      console.log(info);
       acceptedSocketId = info.clientSocketId;
 
       // accetped sockets are paused by default.
@@ -52,8 +52,8 @@ exports.defineManualTests = function(rootEl, addButton) {
     });
 
     chrome.bluetoothSocket.onAcceptError.addListener(function(error) {
-      logger('onAcceptError: ');
-      logger(error);
+      console.log('onAcceptError: ');
+      console.log(error);
     });
   });
 
@@ -61,7 +61,7 @@ exports.defineManualTests = function(rootEl, addButton) {
 
     var isBtDevice = function(device) {
       if (device.uuids.indexOf(testUuid) !== -1) {
-        logger('Find test bluetooth device');
+        console.log('Find test bluetooth device');
         btDevice = device;
         return true;
       }
@@ -87,7 +87,7 @@ exports.defineManualTests = function(rootEl, addButton) {
   addButton('Find Bt Device by Address', function() {
     var isBtDevice = function(device) {
       if (device.address === testAddress) {
-        logger('Find test bluetooth device');
+        console.log('Find test bluetooth device');
         btDevice = device;
         return true;
       }
@@ -114,7 +114,7 @@ exports.defineManualTests = function(rootEl, addButton) {
     chrome.bluetoothSocket.create(function(createInfo) {
       serverSocketId = createInfo.socketId;
       chrome.bluetoothSocket.listenUsingRfcomm(serverSocketId, testUuid, function() {
-        logger('Bluetooth sockets listen using rfcomm success');
+        console.log('Bluetooth sockets listen using rfcomm success');
       });
     });
   });
@@ -123,7 +123,7 @@ exports.defineManualTests = function(rootEl, addButton) {
     chrome.bluetoothSocket.create(function(createInfo) {
       clientSocketId = createInfo.socketId;
       chrome.bluetoothSocket.connect(clientSocketId, btDevice.address, testUuid, function() {
-        logger('Bluetooth sockets connect success');
+        console.log('Bluetooth sockets connect success');
       });
     });
   });
@@ -131,7 +131,7 @@ exports.defineManualTests = function(rootEl, addButton) {
   addButton('Send Message From Connected Socket', function() {
     if (clientSocketId !== null) {
       chrome.bluetoothSocket.send(clientSocketId, convertStringToArrayBuffer('Client Test'), function(bytesSent) {
-        logger('Bytes Send: ' + bytesSent);
+        console.log('Bytes Send: ' + bytesSent);
       });
     }
   });
@@ -139,14 +139,14 @@ exports.defineManualTests = function(rootEl, addButton) {
   addButton('Send Message From Accepted Socket', function() {
     if (acceptedSocketId !== null) {
       chrome.bluetoothSocket.send(acceptedSocketId, convertStringToArrayBuffer('Server Test'), function(bytesSent) {
-        logger('Bytes Send: ' + bytesSent);
+        console.log('Bytes Send: ' + bytesSent);
       });
     }
   });
 
   addButton('Log all sockets', function() {
     chrome.bluetoothSocket.getSockets(function(sockets) {
-      logger(sockets);
+      console.log(sockets);
     });
   });
 };
