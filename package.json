@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-chrome-apps-bluetoothsocket",
-  "version": "1.0.1",
+  "version": "1.0.2-dev",
   "description": "This plugin implements the [chrome.bluetoothSocket](https://developer.chrome.com/apps/bluetoothSocket) API for iOS and Android.",
   "cordova": {
     "id": "cordova-plugin-chrome-apps-bluetoothsocket",
